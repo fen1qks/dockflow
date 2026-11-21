@@ -1,0 +1,114 @@
+[
+ {
+  "test": "CHECK: koniec okna przed początkiem",
+  "oczekiwane": "odrzucenie",
+  "wynik": "awizacje_check",
+  "ok": true,
+  "ms": 3
+ },
+ {
+  "test": "CHECK: 0 palet w pozycji ładunku",
+  "oczekiwane": "odrzucenie",
+  "wynik": "pozycje_ladunku_liczba_palet_check",
+  "ok": true,
+  "ms": 0
+ },
+ {
+  "test": "EXCLUDE: dwie rezerwacje tej samej rampy w nakładającym się czasie",
+  "oczekiwane": "odrzucenie (ex_rampa_bez_kolizji)",
+  "wynik": "ex_rampa_bez_kolizji",
+  "ok": true,
+  "ms": 5
+ },
+ {
+  "test": "UNIQUE: powtórzone zdarzenie z kamery",
+  "oczekiwane": "odrzucenie",
+  "wynik": "zdarzenia_kamer_kamera_id_typ_nr_odczytany_czas_key",
+  "ok": true,
+  "ms": 4
+ },
+ {
+  "test": "Rezerwacja: długość okna z modelu (22 palety napojów, PL)",
+  "oczekiwane": "75 min, wolna rampa, numer WRO/2026/…",
+  "wynik": "WRO/2026/11058, rampa R1, T = 65.8 min → okno 75 min",
+  "ok": true,
+  "ms": 9
+ },
+ {
+  "test": "Rezerwacja: limit pojazdów na godzinę (12)",
+  "oczekiwane": "13. rezerwacja odrzucona",
+  "wynik": "Limit pojazdów (12) w tej godzinie został osiągnięty",
+  "ok": true,
+  "ms": 55
+ },
+ {
+  "test": "Wcześniejszy przyjazd: przydział rampy z najmniejszą wystarczającą luką",
+  "oczekiwane": "R4 (luka 72 min) odrzucona, R5 (luka 90 min) wybrana, okno 09:30 zwolnione",
+  "wynik": "potrzeba R4 78.7 min > 72 → odrzucona; R5 83.0 min ≤ 90 → przydział R5 08:00–09:22; stare okno na R1 zwolnione",
+  "ok": true,
+  "ms": 31
+ },
+ {
+  "test": "Spóźnienie bez zgłoszenia, wszystkie rampy zajęte",
+  "oczekiwane": "lista oczekujących + kara; rampa po wcześniejszym zakończeniu innej operacji",
+  "wynik": "wjazd 09:10 → lista_oczekujacych, kara za spóźnienie; o 09:40 R2 zwolniona wcześniej → przydział R2",
+  "ok": true,
+  "ms": 42
+ },
+ {
+  "test": "Zgłoszenie opóźnienia: przebukowanie",
+  "oczekiwane": "nowe okno od zgłoszonej godziny, bez kary przy wjeździe",
+  "wynik": "okno 10:00 → 13:15, wjazd 13:12 bez kary",
+  "ok": true,
+  "ms": 6
+ },
+ {
+  "test": "No-show: brak wjazdu 30 min po oknie",
+  "oczekiwane": "status no_show + kara",
+  "wynik": "status no_show, kara no_show",
+  "ok": true,
+  "ms": 5
+ },
+ {
+  "test": "Wyzwalacze: historia statusów i dziennik audytu",
+  "oczekiwane": "wpis przy każdej zmianie statusu",
+  "wynik": "–→zaplanowana, zaplanowana→na_bramie, na_bramie→przy_rampie; dziennik audytu: 3 wpisy",
+  "ok": true,
+  "ms": 7
+ },
+ {
+  "test": "RLS: spedytor widzi tylko awizacje swojej firmy",
+  "oczekiwane": "0 cudzych wierszy",
+  "wynik": "w bazie 11057 awizacji, spedytor widzi 281 (swoje), cudzych: 0",
+  "ok": true,
+  "ms": 3
+ },
+ {
+  "test": "Uprawnienia: rezerwacja w imieniu innego przewoźnika",
+  "oczekiwane": "odrzucenie",
+  "wynik": "Brak uprawnień do danych innego przewoźnika",
+  "ok": true,
+  "ms": 0
+ },
+ {
+  "test": "Uprawnienia: kamera nie może czytać awizacji",
+  "oczekiwane": "odrzucenie",
+  "wynik": "permission denied for table awizacje",
+  "ok": true,
+  "ms": 0
+ },
+ {
+  "test": "Uprawnienia: ochrona nie może zmieniać awizacji",
+  "oczekiwane": "odrzucenie",
+  "wynik": "permission denied for table awizacje",
+  "ok": true,
+  "ms": 0
+ },
+ {
+  "test": "Wydajność: rezerwacja okna przy ~11 tys. awizacji",
+  "oczekiwane": "poniżej 1 s",
+  "wynik": "4 ms",
+  "ok": true,
+  "ms": 4
+ }
+]
